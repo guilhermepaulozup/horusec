@@ -19,6 +19,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/ZupIT/horusec-devkit/pkg/utils/logger"
 
@@ -86,7 +87,8 @@ func getVersionAndSubVersion(fullVersion string) (int, int, error) {
 	if err != nil {
 		return 0, 0, ErrDockerNotInstalled
 	}
-	subversion, err := strconv.Atoi(fullVersion[3:5])
+	subversions := strings.Split(fullVersion[3:], ".")
+	subversion, err := strconv.Atoi(subversions[0])
 	if err != nil {
 		return 0, 0, ErrDockerNotInstalled
 	}
